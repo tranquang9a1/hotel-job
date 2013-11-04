@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HotelJobModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="HotelJobEntities1" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Areas" EntityType="HotelJobModel.Area" />
+    <EntitySet Name="Companies" EntityType="HotelJobModel.Company" />
+    <EntitySet Name="Jobs" EntityType="HotelJobModel.Job" />
+    <EntitySet Name="Places" EntityType="HotelJobModel.Place" />
+    <EntitySet Name="Positions" EntityType="HotelJobModel.Position" />
+    <EntitySet Name="Times" EntityType="HotelJobModel.Time" />
+    <AssociationSet Name="FK_Job_Areas" Association="HotelJobModel.FK_Job_Areas">
+      <End Role="Areas" EntitySet="Areas" />
+      <End Role="Job" EntitySet="Jobs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Job_Companies" Association="HotelJobModel.FK_Job_Companies">
+      <End Role="Companies" EntitySet="Companies" />
+      <End Role="Job" EntitySet="Jobs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Job_Places" Association="HotelJobModel.FK_Job_Places">
+      <End Role="Places" EntitySet="Places" />
+      <End Role="Job" EntitySet="Jobs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Job_Positions" Association="HotelJobModel.FK_Job_Positions">
+      <End Role="Positions" EntitySet="Positions" />
+      <End Role="Job" EntitySet="Jobs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Job_Time" Association="HotelJobModel.FK_Job_Time">
+      <End Role="Time" EntitySet="Times" />
+      <End Role="Job" EntitySet="Jobs" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Area">
+    <Key>
+      <PropertyRef Name="areaID" />
+    </Key>
+    <Property Name="areaID" Type="String" Nullable="false" MaxLength="5" Unicode="true" FixedLength="false" />
+    <Property Name="areaName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Jobs" Relationship="HotelJobModel.FK_Job_Areas" FromRole="Areas" ToRole="Job" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="companyID" />
+    </Key>
+    <Property Name="companyID" Type="String" Nullable="false" MaxLength="5" Unicode="true" FixedLength="false" />
+    <Property Name="companyName" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="information" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+    <Property Name="address" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="contact" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="email" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="phone" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Jobs" Relationship="HotelJobModel.FK_Job_Companies" FromRole="Companies" ToRole="Job" />
+  </EntityType>
+  <EntityType Name="Job">
+    <Key>
+      <PropertyRef Name="jobID" />
+    </Key>
+    <Property Name="jobID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="jobName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="salary" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="description" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+    <Property Name="required" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="deadline" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="domainID" Type="String" MaxLength="5" Unicode="true" FixedLength="false" />
+    <Property Name="domainName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="number" Type="Int32" />
+    <Property Name="companyID" Type="String" MaxLength="5" Unicode="true" FixedLength="false" />
+    <Property Name="cityID" Type="String" MaxLength="5" Unicode="true" FixedLength="false" />
+    <Property Name="cityName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="positionName" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="positionID" Type="String" MaxLength="5" Unicode="true" FixedLength="false" />
+    <Property Name="timeID" Type="String" MaxLength="5" Unicode="true" FixedLength="false" />
+    <Property Name="timeInfo" Type="String" MaxLength="200" Unicode="true" FixedLength="true" />
+    <NavigationProperty Name="Area" Relationship="HotelJobModel.FK_Job_Areas" FromRole="Job" ToRole="Areas" />
+    <NavigationProperty Name="Company" Relationship="HotelJobModel.FK_Job_Companies" FromRole="Job" ToRole="Companies" />
+    <NavigationProperty Name="Place" Relationship="HotelJobModel.FK_Job_Places" FromRole="Job" ToRole="Places" />
+    <NavigationProperty Name="Position" Relationship="HotelJobModel.FK_Job_Positions" FromRole="Job" ToRole="Positions" />
+    <NavigationProperty Name="Time" Relationship="HotelJobModel.FK_Job_Time" FromRole="Job" ToRole="Time" />
+  </EntityType>
+  <EntityType Name="Place">
+    <Key>
+      <PropertyRef Name="placeID" />
+    </Key>
+    <Property Name="placeID" Type="String" Nullable="false" MaxLength="5" Unicode="true" FixedLength="false" />
+    <Property Name="placeName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Jobs" Relationship="HotelJobModel.FK_Job_Places" FromRole="Places" ToRole="Job" />
+  </EntityType>
+  <EntityType Name="Position">
+    <Key>
+      <PropertyRef Name="positionID" />
+    </Key>
+    <Property Name="positionID" Type="String" Nullable="false" MaxLength="5" Unicode="true" FixedLength="false" />
+    <Property Name="positionName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Jobs" Relationship="HotelJobModel.FK_Job_Positions" FromRole="Positions" ToRole="Job" />
+  </EntityType>
+  <EntityType Name="Time">
+    <Key>
+      <PropertyRef Name="timeID" />
+    </Key>
+    <Property Name="timeID" Type="String" Nullable="false" MaxLength="5" Unicode="true" FixedLength="false" />
+    <Property Name="timeInfo" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+    <NavigationProperty Name="Jobs" Relationship="HotelJobModel.FK_Job_Time" FromRole="Time" ToRole="Job" />
+  </EntityType>
+  <Association Name="FK_Job_Areas">
+    <End Role="Areas" Type="HotelJobModel.Area" Multiplicity="0..1" />
+    <End Role="Job" Type="HotelJobModel.Job" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Areas">
+        <PropertyRef Name="areaID" />
+      </Principal>
+      <Dependent Role="Job">
+        <PropertyRef Name="domainID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Job_Companies">
+    <End Role="Companies" Type="HotelJobModel.Company" Multiplicity="0..1" />
+    <End Role="Job" Type="HotelJobModel.Job" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Companies">
+        <PropertyRef Name="companyID" />
+      </Principal>
+      <Dependent Role="Job">
+        <PropertyRef Name="companyID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Job_Places">
+    <End Role="Places" Type="HotelJobModel.Place" Multiplicity="0..1" />
+    <End Role="Job" Type="HotelJobModel.Job" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Places">
+        <PropertyRef Name="placeID" />
+      </Principal>
+      <Dependent Role="Job">
+        <PropertyRef Name="cityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Job_Positions">
+    <End Role="Positions" Type="HotelJobModel.Position" Multiplicity="0..1" />
+    <End Role="Job" Type="HotelJobModel.Job" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Positions">
+        <PropertyRef Name="positionID" />
+      </Principal>
+      <Dependent Role="Job">
+        <PropertyRef Name="positionID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Job_Time">
+    <End Role="Time" Type="HotelJobModel.Time" Multiplicity="0..1" />
+    <End Role="Job" Type="HotelJobModel.Job" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Time">
+        <PropertyRef Name="timeID" />
+      </Principal>
+      <Dependent Role="Job">
+        <PropertyRef Name="timeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
