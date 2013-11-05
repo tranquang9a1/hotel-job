@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HotelJobModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="HotelJobEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Cities" EntityType="HotelJobModel.City" />
+    <EntitySet Name="Companies" EntityType="HotelJobModel.Company" />
+    <EntitySet Name="Domains" EntityType="HotelJobModel.Domain" />
+    <EntitySet Name="Jobs" EntityType="HotelJobModel.Job" />
+    <EntitySet Name="Positions" EntityType="HotelJobModel.Position" />
+    <EntitySet Name="Times" EntityType="HotelJobModel.Time" />
+  </EntityContainer>
+  <EntityType Name="City">
+    <Key>
+      <PropertyRef Name="cityID" />
+    </Key>
+    <Property Name="cityID" Type="String" Nullable="false" MaxLength="5" Unicode="true" FixedLength="false" />
+    <Property Name="cityName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="companyID" />
+    </Key>
+    <Property Name="companyID" Type="String" Nullable="false" MaxLength="5" Unicode="true" FixedLength="false" />
+    <Property Name="companyName" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="information" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+    <Property Name="address" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+    <Property Name="contact" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="email" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="phone" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Domain">
+    <Key>
+      <PropertyRef Name="domainID" />
+    </Key>
+    <Property Name="domainID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="domainName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Job">
+    <Key>
+      <PropertyRef Name="jobID" />
+    </Key>
+    <Property Name="jobID" Type="Int32" Nullable="false" />
+    <Property Name="jobName" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="salary" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="description" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+    <Property Name="required" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+    <Property Name="deadline" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="domainID" Type="String" MaxLength="5" Unicode="true" FixedLength="false" />
+    <Property Name="domainName" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="number" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="companyID" Type="Int32" />
+    <Property Name="cityID" Type="String" MaxLength="5" Unicode="true" FixedLength="false" />
+    <Property Name="cityName" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="positionName" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="positionID" Type="String" MaxLength="5" Unicode="true" FixedLength="false" />
+    <Property Name="timeID" Type="String" MaxLength="5" Unicode="true" FixedLength="false" />
+    <Property Name="timeInfo" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Position">
+    <Key>
+      <PropertyRef Name="positionID" />
+    </Key>
+    <Property Name="positionID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="positionName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Time">
+    <Key>
+      <PropertyRef Name="timeID" />
+    </Key>
+    <Property Name="timeID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="timeInfo" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+  </EntityType>
+</Schema>

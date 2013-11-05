@@ -31,24 +31,14 @@ public class HotelCrawler {
      */
     public static void main(String[] args) {
 
-
-
-
-
-
-
         try {
 
             try {
                 ///////////////////////////////
                 //Lấy link từ trang chủ công ty//
                 ///////////////////////////////
-
-
                 String companies[] = null;
-
-
-                for (int i = 4070; i < 5000; i++) {
+                for (int i = 4193; i < 4300; i++) {
 
                     String homelink = "http://hoteljob.vn/Home/Gian-hang/default/" + i + "/trang-chu.aspx";
                     Document getlink = (Document) Jsoup.connect(homelink).timeout(100 * 60).get();
@@ -119,7 +109,6 @@ public class HotelCrawler {
                         String timeID = "";
                         String timeInfo = "";
 
-
                         for (int k = 0; k <= (details.size()); k++) {
 
 
@@ -185,7 +174,6 @@ public class HotelCrawler {
                                 //System.out.println(address);
                             }
                         }
-
 
                         try {
                             /////////////////////////////
