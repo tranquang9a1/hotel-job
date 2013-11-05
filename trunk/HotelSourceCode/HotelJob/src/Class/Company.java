@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @author quang
  */
 public class Company implements Serializable {
-    private String companyID;
+    private int companyID;
     private String companyName;
     private String information;
     private String address;
@@ -23,7 +23,7 @@ public class Company implements Serializable {
     public Company() {
     }
 
-    public Company(String companyID, String companyName, String information, String address, String contact, String phone, String email) {
+    public Company(int companyID, String companyName, String information, String address, String contact, String phone, String email) {
         this.companyID = companyID;
         this.companyName = companyName;
         this.information = information;
@@ -39,14 +39,14 @@ public class Company implements Serializable {
     /**
      * @return the companyID
      */
-    public String getCompanyID() {
+    public int getCompanyID() {
         return companyID;
     }
 
     /**
      * @param companyID the companyID to set
      */
-    public void setCompanyID(String companyID) {
+    public void setCompanyID(int companyID) {
         this.companyID = companyID;
     }
 

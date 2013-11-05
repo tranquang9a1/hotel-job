@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class Job implements Serializable{
 
     
-    private String jobID;
+    private int jobID;
     private String jobName;
     private String salary;
     private String description;
@@ -24,7 +24,6 @@ public class Job implements Serializable{
     private String domainName;
     private String number;
     private String companyID;
-    private String companyName;
     private String cityID;
     private String cityName;
     private String positionID;
@@ -35,7 +34,7 @@ public class Job implements Serializable{
     public Job() {
     }
 
-    public Job(String jobID, String jobName, String salary, String description, String required, String deadline, String domainID, String domainName, String number, String companyID, String companyName, String cityID, String cityName, String positionID, String positionName, String timeID, String timeInfo) {
+    public Job(int jobID, String jobName, String salary, String description, String required, String deadline, String domainID, String domainName, String number, String companyID, String cityID, String cityName, String positionID, String positionName, String timeID, String timeInfo) {
         this.jobID = jobID;
         this.jobName = jobName;
         this.salary = salary;
@@ -46,7 +45,6 @@ public class Job implements Serializable{
         this.domainName = domainName;
         this.number = number;
         this.companyID = companyID;
-        this.companyName = companyName;
         this.cityID = cityID;
         this.cityName = cityName;
         this.positionID = positionID;
@@ -58,14 +56,14 @@ public class Job implements Serializable{
     /**
      * @return the jobID
      */
-    public String getJobID() {
+    public int getJobID() {
         return jobID;
     }
 
     /**
      * @param jobID the jobID to set
      */
-    public void setJobID(String jobID) {
+    public void setJobID(int jobID) {
         this.jobID = jobID;
     }
 
@@ -195,19 +193,7 @@ public class Job implements Serializable{
         this.companyID = companyID;
     }
 
-    /**
-     * @return the companyName
-     */
-    public String getCompanyName() {
-        return companyName;
-    }
 
-    /**
-     * @param companyName the companyName to set
-     */
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
 
     /**
      * @return the cityID

@@ -18,10 +18,10 @@ import java.util.logging.Logger;
  *
  * @author quang
  */
-public class DBConnection implements Serializable{
+public class DBConnection implements Serializable {
 
     public static Connection makeConnection() {
-        
+
         try {
 
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -36,19 +36,21 @@ public class DBConnection implements Serializable{
         return null;
     }
 
-    public static boolean addJob(String jobID, String jobName, String salary, 
+    public static boolean addJob(int jobID, String jobName, String salary,
             String description, String required, String deadline,
-            String domainID, String domainName, String number, String companyID,
-            String companyName, String cityID, String cityName, String positionID,
-            String positionName, String timeID, String timeInfo) {
+            String domainID, String domainName, String number, int companyID,
+            String cityID, String cityName, String positionName,
+            String positionID, String timeID, String timeInfo) {
         Connection con = null;
         PreparedStatement stm = null;
         try {
             con = makeConnection();
-            String sql = "Insert into Job values (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            String sql = "INSERT INTO Jobs (jobID, jobName, salary, description, required, deadline, domainID, domainName, number, companyID, cityID, cityName, positionName, positionID, timeID, timeInfo)"
+                    + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
             stm = con.prepareStatement(sql);
-            
-            stm.setString(1, jobID);
+
+            stm.setInt(1, jobID);
             stm.setString(2, jobName);
             stm.setString(3, salary);
             stm.setString(4, description);
@@ -57,27 +59,54 @@ public class DBConnection implements Serializable{
             stm.setString(7, domainID);
             stm.setString(8, domainName);
             stm.setString(9, number);
-            stm.setString(10, companyID);
-            stm.setString(11, companyName);
-            stm.setString(12, cityID);
-            stm.setString(13, cityName);
+            stm.setInt(10, companyID);
+            stm.setString(11, cityID);
+            stm.setString(12, cityName);
+            stm.setString(13, positionName);
             stm.setString(14, positionID);
-            stm.setString(15, positionName);
-            stm.setString(16, timeID);
-            stm.setString(17, timeInfo);
+            stm.setString(15, timeID);
+            stm.setString(16, timeInfo);
             int rows = stm.executeUpdate();
+
             if (rows > 0) {
                 return true;
             }
 
         } catch (Exception e) {
-        }
-        finally {
+        } finally {
             try {
-                if (stm!=null) {
+                if (stm != null) {
                     stm.close();
                 }
-                if (con!=null) {
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return false;
+    }
+
+    public static boolean addDomain(String domainName) {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = makeConnection();
+            String sql = "INSERT INTO Domain VALUES(?)";
+            stm = con.prepareStatement(sql);
+            stm.setString(1, domainName);
+            int rows = stm.executeUpdate();
+            if (rows > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+        } finally {
+            try {
+                if (stm != null) {
+                    stm.close();
+                }
+                if (con != null) {
                     con.close();
                 }
             } catch (Exception e) {
@@ -86,8 +115,7 @@ public class DBConnection implements Serializable{
         return false;
     }
 
-
-    public static boolean InsertCompany(String companyID, String companyName, 
+    public static boolean InsertCompany(int companyID, String companyName,
             String information, String address, String contact,
             String email, String phone) {
         Connection con = null;
@@ -96,7 +124,7 @@ public class DBConnection implements Serializable{
             con = makeConnection();
             String sql = "INSERT INTO Companies(companyID, companyName, information, address, contact, email, phone) VALUES (?,?,?,?,?,?,?)";
             stm = con.prepareStatement(sql);
-            stm.setString(1, companyID);
+            stm.setInt(1, companyID);
             stm.setString(2, companyName);
             stm.setString(3, information);
             stm.setString(4, address);
@@ -104,25 +132,78 @@ public class DBConnection implements Serializable{
             stm.setString(6, email);
             stm.setString(7, phone);
             int rows = stm.executeUpdate();
-            
+
             if (rows > 0) {
                 return true;
             }
 
         } catch (Exception e) {
-        }
-        finally {
+        } finally {
             try {
-                if (stm!=null) {
+                if (stm != null) {
                     stm.close();
                 }
-                if (con!=null) {
+                if (con != null) {
                     con.close();
                 }
             } catch (Exception e) {
             }
         }
-        
+
+        return false;
+    }
+
+    public static boolean addPosition(String positionName) {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = makeConnection();
+            String sql = "INSERT INTO Positions VALUES(?)";
+            stm = con.prepareStatement(sql);
+            stm.setString(1, positionName);
+            int rows = stm.executeUpdate();
+            if (rows > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+        } finally {
+            try {
+                if (stm != null) {
+                    stm.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+            }
+        }
+        return false;
+    }
+
+    public static boolean addTime(String timeInfo) {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = makeConnection();
+            String sql = "INSERT INTO Time VALUES(?)";
+            stm = con.prepareStatement(sql);
+            stm.setString(1, timeInfo);
+            int rows = stm.executeUpdate();
+            if (rows > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+        } finally {
+            try {
+                if (stm != null) {
+                    stm.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+            }
+        }
         return false;
     }
 }
