@@ -49,7 +49,6 @@ public class DBConnection implements Serializable {
                     + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
             stm = con.prepareStatement(sql);
-
             stm.setInt(1, jobID);
             stm.setString(2, jobName);
             stm.setString(3, salary);

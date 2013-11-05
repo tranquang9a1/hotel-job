@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HotelJobModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="HotelJobModelStoreContainer">
+          <EntitySet Name="City" EntityType="HotelJobModel.Store.City" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Companies" EntityType="HotelJobModel.Store.Companies" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Domain" EntityType="HotelJobModel.Store.Domain" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Jobs" EntityType="HotelJobModel.Store.Jobs" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Positions" EntityType="HotelJobModel.Store.Positions" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Time" EntityType="HotelJobModel.Store.Time" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="cityID" />
+          </Key>
+          <Property Name="cityID" Type="nvarchar" Nullable="false" MaxLength="5" />
+          <Property Name="cityName" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Companies">
+          <Key>
+            <PropertyRef Name="companyID" />
+          </Key>
+          <Property Name="companyID" Type="nvarchar" Nullable="false" MaxLength="5" />
+          <Property Name="companyName" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="information" Type="nvarchar" MaxLength="1000" />
+          <Property Name="address" Type="nvarchar" MaxLength="200" />
+          <Property Name="contact" Type="nvarchar" MaxLength="500" />
+          <Property Name="email" Type="nvarchar" MaxLength="500" />
+          <Property Name="phone" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Domain">
+          <Key>
+            <PropertyRef Name="domainID" />
+          </Key>
+          <Property Name="domainID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="domainName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Jobs">
+          <Key>
+            <PropertyRef Name="jobID" />
+          </Key>
+          <Property Name="jobID" Type="int" Nullable="false" />
+          <Property Name="jobName" Type="nvarchar" MaxLength="500" />
+          <Property Name="salary" Type="nvarchar" MaxLength="100" />
+          <Property Name="description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="required" Type="nvarchar" MaxLength="1000" />
+          <Property Name="deadline" Type="nvarchar" MaxLength="50" />
+          <Property Name="domainID" Type="nvarchar" MaxLength="5" />
+          <Property Name="domainName" Type="nvarchar" MaxLength="500" />
+          <Property Name="number" Type="nvarchar" MaxLength="500" />
+          <Property Name="companyID" Type="int" />
+          <Property Name="cityID" Type="nvarchar" MaxLength="5" />
+          <Property Name="cityName" Type="nvarchar" MaxLength="500" />
+          <Property Name="positionName" Type="nvarchar" MaxLength="500" />
+          <Property Name="positionID" Type="nvarchar" MaxLength="5" />
+          <Property Name="timeID" Type="nvarchar" MaxLength="5" />
+          <Property Name="timeInfo" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="Positions">
+          <Key>
+            <PropertyRef Name="positionID" />
+          </Key>
+          <Property Name="positionID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="positionName" Type="nvarchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Time">
+          <Key>
+            <PropertyRef Name="timeID" />
+          </Key>
+          <Property Name="timeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="timeInfo" Type="nvarchar" Nullable="false" MaxLength="200" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HotelJobModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="HotelJobEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Cities" EntityType="HotelJobModel.City" />
+          <EntitySet Name="Companies" EntityType="HotelJobModel.Company" />
+          <EntitySet Name="Domains" EntityType="HotelJobModel.Domain" />
+          <EntitySet Name="Jobs" EntityType="HotelJobModel.Job" />
+          <EntitySet Name="Positions" EntityType="HotelJobModel.Position" />
+          <EntitySet Name="Times" EntityType="HotelJobModel.Time" />
+        </EntityContainer>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="cityID" />
+          </Key>
+          <Property Name="cityID" Type="String" Nullable="false" MaxLength="5" Unicode="true" FixedLength="false" />
+          <Property Name="cityName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="companyID" />
+          </Key>
+          <Property Name="companyID" Type="String" Nullable="false" MaxLength="5" Unicode="true" FixedLength="false" />
+          <Property Name="companyName" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="information" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="address" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="contact" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="email" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="phone" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Domain">
+          <Key>
+            <PropertyRef Name="domainID" />
+          </Key>
+          <Property Name="domainID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="domainName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="jobID" />
+          </Key>
+          <Property Name="jobID" Type="Int32" Nullable="false" />
+          <Property Name="jobName" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="salary" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="description" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="required" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="deadline" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="domainID" Type="String" MaxLength="5" Unicode="true" FixedLength="false" />
+          <Property Name="domainName" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="number" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="companyID" Type="Int32" />
+          <Property Name="cityID" Type="String" MaxLength="5" Unicode="true" FixedLength="false" />
+          <Property Name="cityName" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="positionName" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="positionID" Type="String" MaxLength="5" Unicode="true" FixedLength="false" />
+          <Property Name="timeID" Type="String" MaxLength="5" Unicode="true" FixedLength="false" />
+          <Property Name="timeInfo" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Position">
+          <Key>
+            <PropertyRef Name="positionID" />
+          </Key>
+          <Property Name="positionID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="positionName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Time">
+          <Key>
+            <PropertyRef Name="timeID" />
+          </Key>
+          <Property Name="timeID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="timeInfo" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HotelJobModelStoreContainer" CdmEntityContainer="HotelJobEntities">
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="HotelJobModel.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="cityID" ColumnName="cityID" />
+                <ScalarProperty Name="cityName" ColumnName="cityName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="HotelJobModel.Company">
+              <MappingFragment StoreEntitySet="Companies">
+                <ScalarProperty Name="companyID" ColumnName="companyID" />
+                <ScalarProperty Name="companyName" ColumnName="companyName" />
+                <ScalarProperty Name="information" ColumnName="information" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="contact" ColumnName="contact" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Domains">
+            <EntityTypeMapping TypeName="HotelJobModel.Domain">
+              <MappingFragment StoreEntitySet="Domain">
+                <ScalarProperty Name="domainID" ColumnName="domainID" />
+                <ScalarProperty Name="domainName" ColumnName="domainName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jobs">
+            <EntityTypeMapping TypeName="HotelJobModel.Job">
+              <MappingFragment StoreEntitySet="Jobs">
+                <ScalarProperty Name="jobID" ColumnName="jobID" />
+                <ScalarProperty Name="jobName" ColumnName="jobName" />
+                <ScalarProperty Name="salary" ColumnName="salary" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="required" ColumnName="required" />
+                <ScalarProperty Name="deadline" ColumnName="deadline" />
+                <ScalarProperty Name="domainID" ColumnName="domainID" />
+                <ScalarProperty Name="domainName" ColumnName="domainName" />
+                <ScalarProperty Name="number" ColumnName="number" />
+                <ScalarProperty Name="companyID" ColumnName="companyID" />
+                <ScalarProperty Name="cityID" ColumnName="cityID" />
+                <ScalarProperty Name="cityName" ColumnName="cityName" />
+                <ScalarProperty Name="positionName" ColumnName="positionName" />
+                <ScalarProperty Name="positionID" ColumnName="positionID" />
+                <ScalarProperty Name="timeID" ColumnName="timeID" />
+                <ScalarProperty Name="timeInfo" ColumnName="timeInfo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Positions">
+            <EntityTypeMapping TypeName="HotelJobModel.Position">
+              <MappingFragment StoreEntitySet="Positions">
+                <ScalarProperty Name="positionID" ColumnName="positionID" />
+                <ScalarProperty Name="positionName" ColumnName="positionName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Times">
+            <EntityTypeMapping TypeName="HotelJobModel.Time">
+              <MappingFragment StoreEntitySet="Time">
+                <ScalarProperty Name="timeID" ColumnName="timeID" />
+                <ScalarProperty Name="timeInfo" ColumnName="timeInfo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

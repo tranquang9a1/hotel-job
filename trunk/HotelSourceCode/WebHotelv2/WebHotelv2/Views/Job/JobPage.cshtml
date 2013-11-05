@@ -1,0 +1,127 @@
+﻿@model IEnumerable<WebHotelv2.Models.Job>
+
+@{
+    ViewBag.Title = "Page";
+}
+
+<h2>Job</h2>
+
+<p>
+    @*@Html.ActionLink("Create New", "Create")*@
+    <a href="/Job/Create" class="btn btn-success">Create New</a>
+</p>
+<div id="container" class="clear">
+    <table class="table table-hover">
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>Job Name
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.jobName)
+                </td>
+
+            </tr>
+            <tr>
+                <td>Salary
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.salary)
+                </td>
+
+            </tr>
+            <tr>
+                <td>Description
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.description)
+                </td>
+
+            </tr>
+            <tr>
+                <td>Required
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.required)
+                </td>
+
+            </tr>
+            <tr>
+                <td>Deadline
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.deadline)
+                </td>
+
+            </tr>
+            
+            <tr>
+                <td>Domain Name
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.domainName)
+                </td>
+
+            </tr>
+            <tr>
+                <td>Number
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.number)
+                </td>
+
+            </tr>
+            
+        
+            <tr>
+                <td>City Name
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cityName)
+                </td>
+
+            </tr>
+            <tr>
+                <td>Position Name
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.positionName)
+                </td>
+
+            </tr>
+        
+        
+            <tr>
+                <td>Time info
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.timeInfo)
+                </td>
+
+            </tr>
+        }
+
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.jobID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.jobID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.jobID })
+            </td>*@
+
+    </table>
+</div>
+
+@*Phân trang*@
+<ul>
+    @for (int i = 1; i <= ViewBag.PageCount; i++)
+    {
+        if (i == ViewBag.CurrentPage)
+        {
+        <a href="#">@i</a>
+        }
+        else
+        {
+        <a href="/Job/JobPage/@i">@i</a>
+        }
+    }
+</ul>
