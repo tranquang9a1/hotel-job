@@ -12,13 +12,13 @@ import java.io.Serializable;
  * @author quang
  */
 public class Time implements Serializable{
-private String timeID;
+private int timeID;
 private String timeInfo;
 
     public Time() {
     }
 
-    public Time(String timeID, String timeInfo) {
+    public Time(int timeID, String timeInfo) {
         this.timeID = timeID;
         this.timeInfo = timeInfo;
     }
@@ -27,14 +27,14 @@ private String timeInfo;
     /**
      * @return the timeID
      */
-    public String getTimeID() {
+    public int getTimeID() {
         return timeID;
     }
 
     /**
      * @param timeID the timeID to set
      */
-    public void setTimeID(String timeID) {
+    public void setTimeID(int timeID) {
         this.timeID = timeID;
     }
 

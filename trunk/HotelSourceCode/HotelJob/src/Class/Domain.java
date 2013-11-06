@@ -12,13 +12,13 @@ import java.io.Serializable;
  * @author quang
  */
 public class Domain implements Serializable{
-    private String domainID;
+    private int domainID;
     private String domainName;
 
     public Domain() {
     }
 
-    public Domain(String domainID, String domainName) {
+    public Domain(int domainID, String domainName) {
         this.domainID = domainID;
         this.domainName = domainName;
     }
@@ -29,14 +29,14 @@ public class Domain implements Serializable{
     /**
      * @return the domainID
      */
-    public String getDomainID() {
+    public int getDomainID() {
         return domainID;
     }
 
     /**
      * @param domainID the domainID to set
      */
-    public void setDomainID(String domainID) {
+    public void setDomainID(int domainID) {
         this.domainID = domainID;
     }
 

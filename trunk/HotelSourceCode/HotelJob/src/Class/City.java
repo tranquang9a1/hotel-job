@@ -12,13 +12,13 @@ import java.io.Serializable;
  */
 public class City implements Serializable {
 
-    private String cityID;
+    private int cityID;
     private String cityName;
 
     public City() {
     }
 
-    public City(String cityID, String cityName) {
+    public City(int cityID, String cityName) {
         this.cityID = cityID;
         this.cityName = cityName;
     }
@@ -26,14 +26,14 @@ public class City implements Serializable {
     /**
      * @return the cityID
      */
-    public String getCityID() {
+    public int getCityID() {
         return cityID;
     }
 
     /**
      * @param cityID the cityID to set
      */
-    public void setCityID(String cityID) {
+    public void setCityID(int cityID) {
         this.cityID = cityID;
     }
 

@@ -12,13 +12,13 @@ import java.io.Serializable;
  * @author quang
  */
 public class Position implements Serializable{
-private String positionID;
+private int positionID;
 private String positionName;
 
     public Position() {
     }
 
-    public Position(String positionID, String positionName) {
+    public Position(int positionID, String positionName) {
         this.positionID = positionID;
         this.positionName = positionName;
     }
@@ -26,14 +26,14 @@ private String positionName;
     /**
      * @return the positionID
      */
-    public String getPositionID() {
+    public int getPositionID() {
         return positionID;
     }
 
     /**
      * @param positionID the positionID to set
      */
-    public void setPositionID(String positionID) {
+    public void setPositionID(int positionID) {
         this.positionID = positionID;
     }
 
