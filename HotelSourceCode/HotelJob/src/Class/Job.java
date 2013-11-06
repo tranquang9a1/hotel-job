@@ -20,21 +20,18 @@ public class Job implements Serializable{
     private String description;
     private String required;
     private String deadline;
-    private String domainID;
+    private int domainID;
     private String domainName;
     private String number;
-    private String companyID;
-    private String cityID;
+    private int companyID;
+    private int cityID;
     private String cityName;
-    private String positionID;
+    private int positionID;
     private String positionName;
-    private String timeID;
+    private int timeID;
     private String timeInfo;
 
-    public Job() {
-    }
-
-    public Job(int jobID, String jobName, String salary, String description, String required, String deadline, String domainID, String domainName, String number, String companyID, String cityID, String cityName, String positionID, String positionName, String timeID, String timeInfo) {
+    public Job(int jobID, String jobName, String salary, String description, String required, String deadline, int domainID, String domainName, String number, int companyID, int cityID, String cityName, int positionID, String positionName, int timeID, String timeInfo) {
         this.jobID = jobID;
         this.jobName = jobName;
         this.salary = salary;
@@ -51,6 +48,9 @@ public class Job implements Serializable{
         this.positionName = positionName;
         this.timeID = timeID;
         this.timeInfo = timeInfo;
+    }
+
+    public Job() {
     }
 
     /**
@@ -140,14 +140,14 @@ public class Job implements Serializable{
     /**
      * @return the domainID
      */
-    public String getDomainID() {
+    public int getDomainID() {
         return domainID;
     }
 
     /**
      * @param domainID the domainID to set
      */
-    public void setDomainID(String domainID) {
+    public void setDomainID(int domainID) {
         this.domainID = domainID;
     }
 
@@ -182,30 +182,28 @@ public class Job implements Serializable{
     /**
      * @return the companyID
      */
-    public String getCompanyID() {
+    public int getCompanyID() {
         return companyID;
     }
 
     /**
      * @param companyID the companyID to set
      */
-    public void setCompanyID(String companyID) {
+    public void setCompanyID(int companyID) {
         this.companyID = companyID;
     }
-
-
 
     /**
      * @return the cityID
      */
-    public String getCityID() {
+    public int getCityID() {
         return cityID;
     }
 
     /**
      * @param cityID the cityID to set
      */
-    public void setCityID(String cityID) {
+    public void setCityID(int cityID) {
         this.cityID = cityID;
     }
 
@@ -226,14 +224,14 @@ public class Job implements Serializable{
     /**
      * @return the positionID
      */
-    public String getPositionID() {
+    public int getPositionID() {
         return positionID;
     }
 
     /**
      * @param positionID the positionID to set
      */
-    public void setPositionID(String positionID) {
+    public void setPositionID(int positionID) {
         this.positionID = positionID;
     }
 
@@ -254,14 +252,14 @@ public class Job implements Serializable{
     /**
      * @return the timeID
      */
-    public String getTimeID() {
+    public int getTimeID() {
         return timeID;
     }
 
     /**
      * @param timeID the timeID to set
      */
-    public void setTimeID(String timeID) {
+    public void setTimeID(int timeID) {
         this.timeID = timeID;
     }
 
@@ -278,6 +276,8 @@ public class Job implements Serializable{
     public void setTimeInfo(String timeInfo) {
         this.timeInfo = timeInfo;
     }
+
+    
 
     
 }

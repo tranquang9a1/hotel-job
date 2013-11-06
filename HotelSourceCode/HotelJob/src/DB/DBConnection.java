@@ -9,6 +9,7 @@ import java.sql.Connection;
 
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import java.util.logging.Level;
@@ -38,9 +39,9 @@ public class DBConnection implements Serializable {
 
     public static boolean addJob(int jobID, String jobName, String salary,
             String description, String required, String deadline,
-            String domainID, String domainName, String number, int companyID,
-            String cityID, String cityName, String positionName,
-            String positionID, String timeID, String timeInfo) {
+            int domainID, String domainName, String number, int companyID,
+            int cityID, String cityName, String positionName,
+            int positionID, int timeID, String timeInfo) {
         Connection con = null;
         PreparedStatement stm = null;
         try {
@@ -55,15 +56,15 @@ public class DBConnection implements Serializable {
             stm.setString(4, description);
             stm.setString(5, required);
             stm.setString(6, deadline);
-            stm.setString(7, domainID);
+            stm.setInt(7, domainID);
             stm.setString(8, domainName);
             stm.setString(9, number);
             stm.setInt(10, companyID);
-            stm.setString(11, cityID);
+            stm.setInt(11, cityID);
             stm.setString(12, cityName);
             stm.setString(13, positionName);
-            stm.setString(14, positionID);
-            stm.setString(15, timeID);
+            stm.setInt(14, positionID);
+            stm.setInt(15, timeID);
             stm.setString(16, timeInfo);
             int rows = stm.executeUpdate();
 
@@ -205,4 +206,102 @@ public class DBConnection implements Serializable {
         }
         return false;
     }
+
+    public static boolean checkDomain(String domainName) {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet result = null;
+        try {
+            con = makeConnection();
+            String sql = "Select * From Domain Where domainName = ?";
+            stm = con.prepareStatement(sql);
+            stm.setString(1, domainName);
+            result = stm.executeQuery();
+            while (result.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+        } finally {
+            try {
+                if (result != null) {
+                    result.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+            }
+        }
+        return false;
+    }
+
+    public static boolean checkTime(String timeInfo) {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet result = null;
+        try {
+            con = makeConnection();
+            String sql = "Select * From Time Where timeInfo = ?";
+            stm = con.prepareStatement(sql);
+            stm.setString(1, timeInfo);
+            result = stm.executeQuery();
+            while (result.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+        } finally {
+            try {
+                if (result != null) {
+                    result.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+            }
+        }
+        return false;
+    }
+
+    public static boolean checkPosition(String positionName) {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet result = null;
+        try {
+            con = makeConnection();
+            String sql = "Select * From Positions Where positionName = ?";
+            stm = con.prepareStatement(sql);
+            stm.setString(1, positionName);
+            result = stm.executeQuery();
+            while (result.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+        } finally {
+            try {
+                if (result != null) {
+                    result.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+            }
+        }
+        return false;
+    }
+
+
+
+
+
 }
