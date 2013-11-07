@@ -7,6 +7,7 @@ package Main;
 import Class.Company;
 import Class.Job;
 import DB.DBConnection;
+import DB.UpdateDatabase;
 import com.sun.org.apache.xpath.internal.operations.Equals;
 
 
@@ -259,6 +260,11 @@ public class HotelCrawler {
 
 
                 }
+
+                UpdateDatabase.UpdateCityID();
+                UpdateDatabase.UpdateDomainID();
+                UpdateDatabase.UpdatePositionID();
+                UpdateDatabase.UpdateTimeID();
 
             } catch (Exception e) {
                 e.printStackTrace();
