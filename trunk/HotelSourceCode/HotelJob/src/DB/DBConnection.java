@@ -37,7 +37,7 @@ public class DBConnection implements Serializable {
         return null;
     }
 
-    public static boolean addJob(int jobID, String jobName, String salary,
+    public static boolean addJob(String jobID, String jobName, String salary,
             String description, String required, String deadline,
             int domainID, String domainName, String number, int companyID,
             int cityID, String cityName, String positionName,
@@ -50,7 +50,8 @@ public class DBConnection implements Serializable {
                     + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
             stm = con.prepareStatement(sql);
-            stm.setInt(1, jobID);
+
+            stm.setString(1, jobID);
             stm.setString(2, jobName);
             stm.setString(3, salary);
             stm.setString(4, description);
@@ -206,6 +207,32 @@ public class DBConnection implements Serializable {
         }
         return false;
     }
+    public static boolean addCity(String cityName) {
+        Connection con = null;
+        PreparedStatement stm = null;
+        try {
+            con = makeConnection();
+            String sql = "INSERT INTO City VALUES(?)";
+            stm = con.prepareStatement(sql);
+            stm.setString(1, cityName);
+            int rows = stm.executeUpdate();
+            if (rows > 0) {
+                return true;
+            }
+        } catch (Exception e) {
+        } finally {
+            try {
+                if (stm != null) {
+                    stm.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+            }
+        }
+        return false;
+    }
 
     public static boolean checkDomain(String domainName) {
         Connection con = null;
@@ -300,7 +327,36 @@ public class DBConnection implements Serializable {
         return false;
     }
 
-
+public static boolean checkCity(String cityName) {
+        Connection con = null;
+        PreparedStatement stm = null;
+        ResultSet result = null;
+        try {
+            con = makeConnection();
+            String sql = "Select * From City Where cityName = ?";
+            stm = con.prepareStatement(sql);
+            stm.setString(1, cityName);
+            result = stm.executeQuery();
+            while (result.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+        } finally {
+            try {
+                if (result != null) {
+                    result.close();
+                }
+                if (stm != null) {
+                    stm.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (Exception e) {
+            }
+        }
+        return false;
+    }
 
 
 

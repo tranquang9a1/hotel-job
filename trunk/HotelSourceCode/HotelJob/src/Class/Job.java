@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class Job implements Serializable{
 
     
-    private int jobID;
+    private String jobID;
     private String jobName;
     private String salary;
     private String description;
@@ -31,7 +31,7 @@ public class Job implements Serializable{
     private int timeID;
     private String timeInfo;
 
-    public Job(int jobID, String jobName, String salary, String description, String required, String deadline, int domainID, String domainName, String number, int companyID, int cityID, String cityName, int positionID, String positionName, int timeID, String timeInfo) {
+    public Job(String jobID, String jobName, String salary, String description, String required, String deadline, int domainID, String domainName, String number, int companyID, int cityID, String cityName, int positionID, String positionName, int timeID, String timeInfo) {
         this.jobID = jobID;
         this.jobName = jobName;
         this.salary = salary;
@@ -56,14 +56,14 @@ public class Job implements Serializable{
     /**
      * @return the jobID
      */
-    public int getJobID() {
+    public String getJobID() {
         return jobID;
     }
 
     /**
      * @param jobID the jobID to set
      */
-    public void setJobID(int jobID) {
+    public void setJobID(String jobID) {
         this.jobID = jobID;
     }
 
