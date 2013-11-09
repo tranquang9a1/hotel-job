@@ -7,7 +7,7 @@ package Main;
 import Class.Company;
 import Class.Job;
 import DB.DBConnection;
-import DB.UpdateDatabase;
+import DB.DBUpdate;
 import com.sun.org.apache.xpath.internal.operations.Equals;
 
 
@@ -45,7 +45,7 @@ public class HotelCrawler {
                 String companies[] = null;
 
 
-                for (int i = 2850; i < 5000; i++) {
+                for (int i = 5; i < 1000; i++) {
                     try {
                         String homelink = "http://hoteljob.vn/Home/Gian-hang/default/" + i + "/trang-chu.aspx";
                         Document getlink = (Document) Jsoup.connect(homelink).timeout(1000 * 60).get();
@@ -102,7 +102,7 @@ public class HotelCrawler {
                             //////////////////
 
                             String size = "";
-                            int jobID = Integer.parseInt(companies[n].substring(32, 37));
+                            String jobID = companies[n].substring(32, 37).toString();
                             String jobName = "";
                             String salary = "";
                             String description = "";
@@ -233,6 +233,13 @@ public class HotelCrawler {
                                 }
                             } catch (Exception e) {
                             }
+                            try {
+                                boolean result = DBConnection.checkCity(cityName);
+                                if (result == false) {
+                                    DBConnection.addCity(cityName);
+                                }
+                            } catch (Exception e) {
+                            }
 
                             try {
                                 /////////////////////////////////
@@ -254,21 +261,21 @@ public class HotelCrawler {
                     } catch (HttpStatusException e) {
                         continue;
                     }
-//                     catch (ArrayIndexOutOfBoundsException e) {
-//                        continue;
-//                    }
+                     catch (NumberFormatException e) {
+                        continue;
+                    }
 
 
                 }
 
-                UpdateDatabase.UpdateCityID();
-                UpdateDatabase.UpdateDomainID();
-                UpdateDatabase.UpdatePositionID();
-                UpdateDatabase.UpdateTimeID();
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
+            DBUpdate.UpdateCityID();
+            DBUpdate.UpdateDomainID();
+            DBUpdate.UpdatePositionID();
+            DBUpdate.UpdateTimeID();
 
         } catch (Exception e) {
             e.printStackTrace();
