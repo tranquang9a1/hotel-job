@@ -14,7 +14,14 @@ namespace WebHotelv2.Models
     
     public partial class Time
     {
+        public Time()
+        {
+            this.Jobs = new HashSet<Job>();
+        }
+    
         public int timeID { get; set; }
         public string timeInfo { get; set; }
+    
+        public virtual ICollection<Job> Jobs { get; set; }
     }
 }

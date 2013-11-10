@@ -14,7 +14,14 @@ namespace WebHotelv2.Models
     
     public partial class City
     {
-        public string cityID { get; set; }
+        public City()
+        {
+            this.Jobs = new HashSet<Job>();
+        }
+    
+        public int cityID { get; set; }
         public string cityName { get; set; }
+    
+        public virtual ICollection<Job> Jobs { get; set; }
     }
 }

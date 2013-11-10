@@ -11,21 +11,34 @@
           <EntitySet Name="Domain" EntityType="HotelJobModel.Store.Domain" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Jobs" EntityType="HotelJobModel.Store.Jobs" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Positions" EntityType="HotelJobModel.Store.Positions" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="sysdiagrams" EntityType="HotelJobModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Time" EntityType="HotelJobModel.Store.Time" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Jobs_City" Association="HotelJobModel.Store.FK_Jobs_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Jobs" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Jobs_Domain" Association="HotelJobModel.Store.FK_Jobs_Domain">
+            <End Role="Domain" EntitySet="Domain" />
+            <End Role="Jobs" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Jobs_Time" Association="HotelJobModel.Store.FK_Jobs_Time">
+            <End Role="Time" EntitySet="Time" />
+            <End Role="Jobs" EntitySet="Jobs" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="City">
           <Key>
             <PropertyRef Name="cityID" />
           </Key>
-          <Property Name="cityID" Type="nvarchar" Nullable="false" MaxLength="5" />
-          <Property Name="cityName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="cityID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="cityName" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Companies">
           <Key>
             <PropertyRef Name="companyID" />
           </Key>
-          <Property Name="companyID" Type="nvarchar" Nullable="false" MaxLength="5" />
-          <Property Name="companyName" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="companyID" Type="int" Nullable="false" />
+          <Property Name="companyName" Type="nvarchar" MaxLength="200" />
           <Property Name="information" Type="nvarchar" MaxLength="1000" />
           <Property Name="address" Type="nvarchar" MaxLength="200" />
           <Property Name="contact" Type="nvarchar" MaxLength="500" />
@@ -43,21 +56,21 @@
           <Key>
             <PropertyRef Name="jobID" />
           </Key>
-          <Property Name="jobID" Type="int" Nullable="false" />
+          <Property Name="jobID" Type="nvarchar" Nullable="false" MaxLength="50" />
           <Property Name="jobName" Type="nvarchar" MaxLength="500" />
           <Property Name="salary" Type="nvarchar" MaxLength="100" />
           <Property Name="description" Type="nvarchar" MaxLength="1000" />
           <Property Name="required" Type="nvarchar" MaxLength="1000" />
           <Property Name="deadline" Type="nvarchar" MaxLength="50" />
-          <Property Name="domainID" Type="nvarchar" MaxLength="5" />
+          <Property Name="domainID" Type="int" />
           <Property Name="domainName" Type="nvarchar" MaxLength="500" />
           <Property Name="number" Type="nvarchar" MaxLength="500" />
           <Property Name="companyID" Type="int" />
-          <Property Name="cityID" Type="nvarchar" MaxLength="5" />
+          <Property Name="cityID" Type="int" />
           <Property Name="cityName" Type="nvarchar" MaxLength="500" />
           <Property Name="positionName" Type="nvarchar" MaxLength="500" />
-          <Property Name="positionID" Type="nvarchar" MaxLength="5" />
-          <Property Name="timeID" Type="nvarchar" MaxLength="5" />
+          <Property Name="positionID" Type="int" />
+          <Property Name="timeID" Type="int" />
           <Property Name="timeInfo" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="Positions">
@@ -65,41 +78,101 @@
             <PropertyRef Name="positionID" />
           </Key>
           <Property Name="positionID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="positionName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="positionName" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="Time">
           <Key>
             <PropertyRef Name="timeID" />
           </Key>
           <Property Name="timeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="timeInfo" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="timeInfo" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <Association Name="FK_Jobs_City">
+          <End Role="City" Type="HotelJobModel.Store.City" Multiplicity="0..1" />
+          <End Role="Jobs" Type="HotelJobModel.Store.Jobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="cityID" />
+            </Principal>
+            <Dependent Role="Jobs">
+              <PropertyRef Name="cityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Jobs_Domain">
+          <End Role="Domain" Type="HotelJobModel.Store.Domain" Multiplicity="0..1" />
+          <End Role="Jobs" Type="HotelJobModel.Store.Jobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Domain">
+              <PropertyRef Name="domainID" />
+            </Principal>
+            <Dependent Role="Jobs">
+              <PropertyRef Name="domainID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Jobs_Time">
+          <End Role="Time" Type="HotelJobModel.Store.Time" Multiplicity="0..1" />
+          <End Role="Jobs" Type="HotelJobModel.Store.Jobs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Time">
+              <PropertyRef Name="timeID" />
+            </Principal>
+            <Dependent Role="Jobs">
+              <PropertyRef Name="timeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HotelJobModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="HotelJobEntities" p1:LazyLoadingEnabled="true">
+        <EntityContainer Name="HotelJobEntities2" p1:LazyLoadingEnabled="true">
           <EntitySet Name="Cities" EntityType="HotelJobModel.City" />
           <EntitySet Name="Companies" EntityType="HotelJobModel.Company" />
           <EntitySet Name="Domains" EntityType="HotelJobModel.Domain" />
           <EntitySet Name="Jobs" EntityType="HotelJobModel.Job" />
           <EntitySet Name="Positions" EntityType="HotelJobModel.Position" />
+          <EntitySet Name="sysdiagrams" EntityType="HotelJobModel.sysdiagram" />
           <EntitySet Name="Times" EntityType="HotelJobModel.Time" />
+          <AssociationSet Name="FK_Jobs_City" Association="HotelJobModel.FK_Jobs_City">
+            <End Role="City" EntitySet="Cities" />
+            <End Role="Jobs" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Jobs_Domain" Association="HotelJobModel.FK_Jobs_Domain">
+            <End Role="Domain" EntitySet="Domains" />
+            <End Role="Jobs" EntitySet="Jobs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Jobs_Time" Association="HotelJobModel.FK_Jobs_Time">
+            <End Role="Time" EntitySet="Times" />
+            <End Role="Jobs" EntitySet="Jobs" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="City">
           <Key>
             <PropertyRef Name="cityID" />
           </Key>
-          <Property Name="cityID" Type="String" Nullable="false" MaxLength="5" Unicode="true" FixedLength="false" />
-          <Property Name="cityName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="cityID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="cityName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Jobs" Relationship="HotelJobModel.FK_Jobs_City" FromRole="City" ToRole="Jobs" />
         </EntityType>
         <EntityType Name="Company">
           <Key>
             <PropertyRef Name="companyID" />
           </Key>
-          <Property Name="companyID" Type="String" Nullable="false" MaxLength="5" Unicode="true" FixedLength="false" />
-          <Property Name="companyName" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="companyID" Type="Int32" Nullable="false" />
+          <Property Name="companyName" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
           <Property Name="information" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
           <Property Name="address" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
           <Property Name="contact" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
@@ -112,48 +185,99 @@
           </Key>
           <Property Name="domainID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="domainName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Jobs" Relationship="HotelJobModel.FK_Jobs_Domain" FromRole="Domain" ToRole="Jobs" />
         </EntityType>
         <EntityType Name="Job">
           <Key>
             <PropertyRef Name="jobID" />
           </Key>
-          <Property Name="jobID" Type="Int32" Nullable="false" />
+          <Property Name="jobID" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="jobName" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
           <Property Name="salary" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <Property Name="description" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
           <Property Name="required" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
           <Property Name="deadline" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="domainID" Type="String" MaxLength="5" Unicode="true" FixedLength="false" />
+          <Property Name="domainID" Type="Int32" />
           <Property Name="domainName" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
           <Property Name="number" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
           <Property Name="companyID" Type="Int32" />
-          <Property Name="cityID" Type="String" MaxLength="5" Unicode="true" FixedLength="false" />
+          <Property Name="cityID" Type="Int32" />
           <Property Name="cityName" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
           <Property Name="positionName" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
-          <Property Name="positionID" Type="String" MaxLength="5" Unicode="true" FixedLength="false" />
-          <Property Name="timeID" Type="String" MaxLength="5" Unicode="true" FixedLength="false" />
+          <Property Name="positionID" Type="Int32" />
+          <Property Name="timeID" Type="Int32" />
           <Property Name="timeInfo" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="City" Relationship="HotelJobModel.FK_Jobs_City" FromRole="Jobs" ToRole="City" />
+          <NavigationProperty Name="Domain" Relationship="HotelJobModel.FK_Jobs_Domain" FromRole="Jobs" ToRole="Domain" />
+          <NavigationProperty Name="Time" Relationship="HotelJobModel.FK_Jobs_Time" FromRole="Jobs" ToRole="Time" />
         </EntityType>
         <EntityType Name="Position">
           <Key>
             <PropertyRef Name="positionID" />
           </Key>
           <Property Name="positionID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="positionName" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="positionName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" Unicode="true" FixedLength="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="Time">
           <Key>
             <PropertyRef Name="timeID" />
           </Key>
           <Property Name="timeID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="timeInfo" Type="String" Nullable="false" MaxLength="200" Unicode="true" FixedLength="false" />
+          <Property Name="timeInfo" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Jobs" Relationship="HotelJobModel.FK_Jobs_Time" FromRole="Time" ToRole="Jobs" />
         </EntityType>
+        <Association Name="FK_Jobs_City">
+          <End Role="City" Type="HotelJobModel.City" Multiplicity="0..1" />
+          <End Role="Jobs" Type="HotelJobModel.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="cityID" />
+            </Principal>
+            <Dependent Role="Jobs">
+              <PropertyRef Name="cityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Jobs_Domain">
+          <End Role="Domain" Type="HotelJobModel.Domain" Multiplicity="0..1" />
+          <End Role="Jobs" Type="HotelJobModel.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Domain">
+              <PropertyRef Name="domainID" />
+            </Principal>
+            <Dependent Role="Jobs">
+              <PropertyRef Name="domainID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Jobs_Time">
+          <End Role="Time" Type="HotelJobModel.Time" Multiplicity="0..1" />
+          <End Role="Jobs" Type="HotelJobModel.Job" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Time">
+              <PropertyRef Name="timeID" />
+            </Principal>
+            <Dependent Role="Jobs">
+              <PropertyRef Name="timeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="HotelJobModelStoreContainer" CdmEntityContainer="HotelJobEntities">
+        <EntityContainerMapping StorageEntityContainer="HotelJobModelStoreContainer" CdmEntityContainer="HotelJobEntities2">
           <EntitySetMapping Name="Cities">
             <EntityTypeMapping TypeName="HotelJobModel.City">
               <MappingFragment StoreEntitySet="City">
@@ -210,6 +334,17 @@
               <MappingFragment StoreEntitySet="Positions">
                 <ScalarProperty Name="positionID" ColumnName="positionID" />
                 <ScalarProperty Name="positionName" ColumnName="positionName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="HotelJobModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

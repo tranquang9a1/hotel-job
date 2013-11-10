@@ -6,21 +6,34 @@
     <EntitySet Name="Domain" EntityType="HotelJobModel.Store.Domain" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Jobs" EntityType="HotelJobModel.Store.Jobs" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Positions" EntityType="HotelJobModel.Store.Positions" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sysdiagrams" EntityType="HotelJobModel.Store.sysdiagrams" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Time" EntityType="HotelJobModel.Store.Time" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Jobs_City" Association="HotelJobModel.Store.FK_Jobs_City">
+      <End Role="City" EntitySet="City" />
+      <End Role="Jobs" EntitySet="Jobs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Jobs_Domain" Association="HotelJobModel.Store.FK_Jobs_Domain">
+      <End Role="Domain" EntitySet="Domain" />
+      <End Role="Jobs" EntitySet="Jobs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Jobs_Time" Association="HotelJobModel.Store.FK_Jobs_Time">
+      <End Role="Time" EntitySet="Time" />
+      <End Role="Jobs" EntitySet="Jobs" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="City">
     <Key>
       <PropertyRef Name="cityID" />
     </Key>
-    <Property Name="cityID" Type="nvarchar" Nullable="false" MaxLength="5" />
-    <Property Name="cityName" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="cityID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="cityName" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Companies">
     <Key>
       <PropertyRef Name="companyID" />
     </Key>
-    <Property Name="companyID" Type="nvarchar" Nullable="false" MaxLength="5" />
-    <Property Name="companyName" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="companyID" Type="int" Nullable="false" />
+    <Property Name="companyName" Type="nvarchar" MaxLength="200" />
     <Property Name="information" Type="nvarchar" MaxLength="1000" />
     <Property Name="address" Type="nvarchar" MaxLength="200" />
     <Property Name="contact" Type="nvarchar" MaxLength="500" />
@@ -38,21 +51,21 @@
     <Key>
       <PropertyRef Name="jobID" />
     </Key>
-    <Property Name="jobID" Type="int" Nullable="false" />
+    <Property Name="jobID" Type="nvarchar" Nullable="false" MaxLength="50" />
     <Property Name="jobName" Type="nvarchar" MaxLength="500" />
     <Property Name="salary" Type="nvarchar" MaxLength="100" />
     <Property Name="description" Type="nvarchar" MaxLength="1000" />
     <Property Name="required" Type="nvarchar" MaxLength="1000" />
     <Property Name="deadline" Type="nvarchar" MaxLength="50" />
-    <Property Name="domainID" Type="nvarchar" MaxLength="5" />
+    <Property Name="domainID" Type="int" />
     <Property Name="domainName" Type="nvarchar" MaxLength="500" />
     <Property Name="number" Type="nvarchar" MaxLength="500" />
     <Property Name="companyID" Type="int" />
-    <Property Name="cityID" Type="nvarchar" MaxLength="5" />
+    <Property Name="cityID" Type="int" />
     <Property Name="cityName" Type="nvarchar" MaxLength="500" />
     <Property Name="positionName" Type="nvarchar" MaxLength="500" />
-    <Property Name="positionID" Type="nvarchar" MaxLength="5" />
-    <Property Name="timeID" Type="nvarchar" MaxLength="5" />
+    <Property Name="positionID" Type="int" />
+    <Property Name="timeID" Type="int" />
     <Property Name="timeInfo" Type="nvarchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="Positions">
@@ -60,13 +73,59 @@
       <PropertyRef Name="positionID" />
     </Key>
     <Property Name="positionID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="positionName" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="positionName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" Nullable="false" MaxLength="128" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
   <EntityType Name="Time">
     <Key>
       <PropertyRef Name="timeID" />
     </Key>
     <Property Name="timeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-    <Property Name="timeInfo" Type="nvarchar" Nullable="false" MaxLength="200" />
+    <Property Name="timeInfo" Type="nvarchar" MaxLength="50" />
   </EntityType>
+  <Association Name="FK_Jobs_City">
+    <End Role="City" Type="HotelJobModel.Store.City" Multiplicity="0..1" />
+    <End Role="Jobs" Type="HotelJobModel.Store.Jobs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="City">
+        <PropertyRef Name="cityID" />
+      </Principal>
+      <Dependent Role="Jobs">
+        <PropertyRef Name="cityID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Jobs_Domain">
+    <End Role="Domain" Type="HotelJobModel.Store.Domain" Multiplicity="0..1" />
+    <End Role="Jobs" Type="HotelJobModel.Store.Jobs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Domain">
+        <PropertyRef Name="domainID" />
+      </Principal>
+      <Dependent Role="Jobs">
+        <PropertyRef Name="domainID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Jobs_Time">
+    <End Role="Time" Type="HotelJobModel.Store.Time" Multiplicity="0..1" />
+    <End Role="Jobs" Type="HotelJobModel.Store.Jobs" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Time">
+        <PropertyRef Name="timeID" />
+      </Principal>
+      <Dependent Role="Jobs">
+        <PropertyRef Name="timeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

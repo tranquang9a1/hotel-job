@@ -14,7 +14,7 @@ namespace WebHotelv2.Models
     
     public partial class Company
     {
-        public string companyID { get; set; }
+        public int companyID { get; set; }
         public string companyName { get; set; }
         public string information { get; set; }
         public string address { get; set; }

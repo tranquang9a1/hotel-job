@@ -14,7 +14,14 @@ namespace WebHotelv2.Models
     
     public partial class Domain
     {
+        public Domain()
+        {
+            this.Jobs = new HashSet<Job>();
+        }
+    
         public int domainID { get; set; }
         public string domainName { get; set; }
+    
+        public virtual ICollection<Job> Jobs { get; set; }
     }
 }

@@ -13,10 +13,10 @@ namespace WebHotelv2.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class HotelJobEntities : DbContext
+    public partial class HotelJobEntities2 : DbContext
     {
-        public HotelJobEntities()
-            : base("name=HotelJobEntities")
+        public HotelJobEntities2()
+            : base("name=HotelJobEntities2")
         {
         }
     
@@ -30,6 +30,7 @@ namespace WebHotelv2.Models
         public DbSet<Domain> Domains { get; set; }
         public DbSet<Job> Jobs { get; set; }
         public DbSet<Position> Positions { get; set; }
+        public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<Time> Times { get; set; }
     }
 }
