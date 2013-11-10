@@ -11,27 +11,33 @@ namespace WebHotelv2.Controllers
 { 
     public class JobController : Controller
     {
-        private HotelJobEntities db = new HotelJobEntities();
+        private HotelJobEntities2 db = new HotelJobEntities2();
 
         //
         // GET: /Job/
 
-        public ViewResult Index()
+        public ViewResult Index(int id)
         {
-            return View(db.Jobs.ToList());
-        }
 
-        //
-        //Phân trang
-        public ViewResult JobPage(int id)
-        {
-            var job = db.Jobs.OrderByDescending(t => t.jobID).Skip((id - 1) * 1).Take(1);
+            var job = db.Jobs.OrderByDescending(t => t.jobID).Skip((id - 1) * 10).Take(10)/*.Include(a => a.domainID).Include(b => b.cityID).Include(c => c.timeID)*/;
             var count = db.Jobs.Count();
-            int pagesize = count / 1 + ((count % 5 != 0) ? 1 : 0);
+            int pagesize = count / 10 + ((count % 10 != 0) ? 1 : 0);
             ViewBag.PageCount = pagesize;
             ViewBag.CurrentPage = id;
             return View(job);
         }
+
+        //
+        //Phân trang
+        //public ViewResult JobPage(int id)
+        //{
+        //    var job = db.Jobs.OrderByDescending(t => t.jobID).Skip((id - 1) * 1).Take(1);
+        //    var count = db.Jobs.Count();
+        //    int pagesize = count / 1 + ((count % 5 != 0) ? 1 : 0);
+        //    ViewBag.PageCount = pagesize;
+        //    ViewBag.CurrentPage = id;
+        //    return View(job);
+        //}
 
         //
         // GET: /Job/Details/5

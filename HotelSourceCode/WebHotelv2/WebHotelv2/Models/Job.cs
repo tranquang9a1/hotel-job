@@ -14,21 +14,25 @@ namespace WebHotelv2.Models
     
     public partial class Job
     {
-        public int jobID { get; set; }
+        public string jobID { get; set; }
         public string jobName { get; set; }
         public string salary { get; set; }
         public string description { get; set; }
         public string required { get; set; }
         public string deadline { get; set; }
-        public string domainID { get; set; }
+        public Nullable<int> domainID { get; set; }
         public string domainName { get; set; }
         public string number { get; set; }
         public Nullable<int> companyID { get; set; }
-        public string cityID { get; set; }
+        public Nullable<int> cityID { get; set; }
         public string cityName { get; set; }
         public string positionName { get; set; }
-        public string positionID { get; set; }
-        public string timeID { get; set; }
+        public Nullable<int> positionID { get; set; }
+        public Nullable<int> timeID { get; set; }
         public string timeInfo { get; set; }
+    
+        public virtual City City { get; set; }
+        public virtual Domain Domain { get; set; }
+        public virtual Time Time { get; set; }
     }
 }

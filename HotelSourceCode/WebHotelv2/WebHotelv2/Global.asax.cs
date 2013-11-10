@@ -26,7 +26,7 @@ namespace WebHotelv2
             routes.MapRoute(
                 "Default", // Route name
                 "{controller}/{action}/{id}", // URL with parameters
-                new { controller = "Job", action = "Index", id = UrlParameter.Optional } // Parameter defaults
+                new { controller = "Job", action = "Index", id = 1 } // Parameter defaults
             );
 
         }
