@@ -1,0 +1,78 @@
+﻿@model IEnumerable<WebHotelv2.Models.Company>
+
+@{
+    ViewBag.Title = "Company";
+}
+
+<h2>Company</h2>
+@*
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table table-hover">
+    <tr>
+        <th>
+            companyName
+        </th>
+        <th>
+            information
+        </th>
+        <th>
+            address
+        </th>
+        <th>
+            contact
+        </th>
+        <th>
+            email
+        </th>
+        <th>
+            phone
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.companyName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.information)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.contact)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.phone)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.companyID }) |
+            @*@Html.ActionLink("Details", "Details", new { id=item.companyID }) |*@
+            @Html.ActionLink("Delete", "Delete", new { id=item.companyID })
+        </td>
+    </tr>
+}
+
+</table>
+
+@*Phân trang*@
+<ul>
+    @for (int i = 1; i <= ViewBag.PageCount; i++)
+    {
+        if (i == ViewBag.CurrentPage)
+        {
+        <a href="#">@i</a>
+        }
+        else
+        {
+        <a href="/Company/Index/@i">@i</a>
+        }
+    }
+</ul>
